@@ -130,7 +130,10 @@ def download_tweets( fetch_list, raw_dir ):
         # pull data
         # url = 'http://api.twitter.com/1/statuses/show.json?id=' + item[2]
         # urllib.urlretrieve( url, raw_dir + item[2] + '.json' )
-        data = twitter.show_status(id=item[2])
+        try:
+            data = twitter.show_status(id=item[2])
+        except:
+            print ("Tweet was not found")
         with open(raw_dir + item[2]+'.json', 'w') as outfile:
             json.dump(data, outfile)
 
